@@ -82,59 +82,67 @@ function randomCard() {
 }
 
 function startGame() {
-    if (NoOfAttempt > 0) {
-        if (document.getElementById("quantity").value != "" &&
-            document.getElementById("quantity").value < 7 &&
-            document.getElementById("quantity").value > 1) {
-            rewardel.style.color = "goldenrod"
-            rewardel.style.fontSize = "20px"
-            rewardel.style.fontWeight = "bold"
-            isAlive = true
-            let firstCard = randomCard()
-            let secondCard = randomCard()
-            cards = [firstCard, secondCard]
-            if (indOfprize != -1) {
-                document.getElementById(prizes[indOfprize].name).classList.remove("currentPlayer")
+    if (isSelected) {
+        if (NoOfAttempt > 0) {
+            if (document.getElementById("quantity").value != "" &&
+                document.getElementById("quantity").value < 7 &&
+                document.getElementById("quantity").value > 1) {
+                rewardel.style.color = "goldenrod"
+                rewardel.style.fontSize = "20px"
+                rewardel.style.fontWeight = "bold"
+                isAlive = true
+                let firstCard = randomCard()
+                let secondCard = randomCard()
+                cards = [firstCard, secondCard]
+                if (indOfprize != -1) {
+                    document.getElementById(prizes[indOfprize].name).classList.remove("currentPlayer")
+                }
+                indOfprize++;
+                indOfprize = indOfprize % NoOfPlayers
+                document.getElementById(prizes[indOfprize].name).classList.add("currentPlayer")
+                renderGame(prizes[indOfprize])
+            } else {
+                alert("Please! select valid No. of players");
+                document.getElementById("quantity").value = NoOfPlayers
             }
-            indOfprize++;
-            indOfprize = indOfprize % NoOfPlayers
-            document.getElementById(prizes[indOfprize].name).classList.add("currentPlayer")
-            renderGame(prizes[indOfprize])
         } else {
-            alert("Please! select valid No. of players");
-            document.getElementById("quantity").value = NoOfPlayers
+            document.getElementById(prizes[NoOfPlayers - 1].name).classList.remove("currentPlayer")
+            document.getElementById(prizes[0].name).classList.remove("currentPlayer")
+            prizes.sort((a, b) => b.reward - a.reward)
+            if (prizes[0].reward != prizes[1].reward) {
+                scoreBoardEl.textContent = "The Winner is " + prizes[0].name + " with highest Score of " + prizes[0].reward + "$"
+                document.getElementById(prizes[0].name).classList.add("winner")
+            } else {
+                scoreBoardEl.textContent = "Game Tied"
+            }
+            rewardel.textContent = ""
+            isAlive = false
         }
+        NoOfAttempt--;
     } else {
-        document.getElementById(prizes[NoOfPlayers - 1].name).classList.remove("currentPlayer")
-        document.getElementById(prizes[0].name).classList.remove("currentPlayer")
-        prizes.sort((a, b) => b.reward - a.reward)
-        if (prizes[0].reward != prizes[1].reward) {
-            scoreBoardEl.textContent = "The Winner is " + prizes[0].name + " with highest Score of " + prizes[0].reward + "$"
-            document.getElementById(prizes[0].name).classList.add("currentPlayer")
-        } else {
-            scoreBoardEl.textContent = "Game Tied"
-        }
-        rewardel.textContent = ""
-        isAlive = false
+        alert("Please! show the teams")
     }
-    NoOfAttempt--;
 }
 
 function addNewCard() {
-    if (isAlive) {
-        if (document.getElementById("quantity").value != "" &&
-            document.getElementById("quantity").value < 7 &&
-            document.getElementById("quantity").value > 1) {
-            let newcard = randomCard();
-            cards.push(newcard);
-            renderGame(prizes[indOfprize])
+    if (isSelected) {
+        if (isAlive) {
+            if (document.getElementById("quantity").value != "" &&
+                document.getElementById("quantity").value < 7 &&
+                document.getElementById("quantity").value > 1) {
+                let newcard = randomCard();
+                cards.push(newcard);
+                renderGame(prizes[indOfprize])
+            } else {
+                alert("Please! select valid No. of players");
+                document.getElementById("quantity").value = NoOfPlayers
+            }
         } else {
-            alert("Please! select valid No. of players");
+            alert("You can't take more cards ");
             document.getElementById("quantity").value = NoOfPlayers
         }
     } else {
-        alert("You can't take more cards ");
-        document.getElementById("quantity").value = NoOfPlayers
+        alert("Please! show the teams")
     }
 
 }
@@ -156,13 +164,13 @@ function renderGame(curr) {
     } else if (sum === 21) {
         curr.reward += 5
         document.getElementById(curr.name).textContent = curr.name + " : " + curr.reward + "$"
-        rewardel.style.color = "white";
+        rewardel.style.color = "#bc81e3";
         message = "You have won a Blackjack & Score: " + 5 + "$";
         isAlive = false;
         document.getElementById(curr.name).classList.remove("currentPlayer")
         document.getElementById(prizes[(indOfprize + 1) % NoOfPlayers].name).classList.add("currentPlayer")
     } else if (sum > 21) {
-        rewardel.style.color = "red"
+        rewardel.style.color = "white"
         message = "Sorry,Pass the Game to Next Team!"
         isAlive = false;
         document.getElementById(curr.name).classList.remove("currentPlayer")
