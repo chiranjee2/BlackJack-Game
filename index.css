@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
 
 .page-background {
-    background-color: green;
+    background-color: #19083b;
     text-align: center;
     color: goldenrod;
     height: 100vh;
@@ -15,14 +15,24 @@
     text-decoration: underline;
 }
 
+#quantity {
+    background-color: white;
+    border-width: 0px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 10px;
+    color: #49146b;
+}
+
 #cardElement {
-    color: white;
+    color: goldenrod;
     font-size: 19px;
     font-weight: bold;
 }
 
 #sumElement {
-    color: white;
+    color: goldenrod;
     font-size: 19px;
     font-weight: bold;
 }
@@ -30,12 +40,25 @@
 .btnstyle {
     border-width: 0px;
     background-color: goldenrod;
-    border-radius: 5px;
-    font-size: 16px;
-    color: green;
+    border-radius: 30px;
+    font-size: 20px;
+    color: #19083b;
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: bold;
+    width: 150px;
+    margin: 10px;
+}
+
+.playButton {
+    border-width: 0px;
+    background-color: #49146b;
+    border-radius: 40px;
+    font-size: 25px;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bolder;
     width: 150px;
     margin: 10px;
 }
@@ -49,17 +72,30 @@
 }
 
 .teamPlayersScore {
-    height: 20px;
+    height: 30px;
     width: 230px;
-    font-size: 16px;
+    font-size: 20px;
     margin: 2px;
-    color: black;
+    color: goldenrod;
     font-weight: bolder;
     font-family: "Roboto";
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .currentPlayer {
-    background-color: white;
-    color: red;
+    background-color: #f2f4f5;
+    color: #19083b;
+}
+
+.winner {
+    background-color: green;
+    color: #19083b;
+}
+
+.GameTitleStyle {
+    color: #19083b;
+    font-size: 50px;
+    text-align: center;
+    background-color: goldenrod;
+    margin-bottom: 0px;
 }
